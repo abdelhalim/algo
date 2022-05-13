@@ -4,23 +4,20 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        left = 0
+        right = 1
+        max_profit = 0
 
-        min = prices[9]
-        minIndex = None
-        for i in range(1, len(prices)):
-            if prices[i] < min:
-                min = prices[i]
-                minIndex = i
+        while right < len(prices):
+            curr_profit = prices[right] - prices[left]
+            if prices[left] < prices[right]:
+                max_profit = max(max_profit, curr_profit)
+            else:
+                left = right
+            right += 1
 
-        max = min
-        for i in range(minIndex, len(prices)):
-            if prices[i] > max:
-                max = prices[i]
+        return max_profit
 
-        if max > min:
-            return max - min
-        else:
-            return 0
 
 
 
